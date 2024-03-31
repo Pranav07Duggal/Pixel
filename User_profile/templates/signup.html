@@ -1,0 +1,91 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+<style>
+
+</style>
+
+<div>
+<form action="{%url 'signup'%}" class=" w-50 ml-auto mr-auto mt-5 p-5" style="box-shadow: 0 0 10px grey;" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    <!-- messages -->
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- 2 column grid layout with text inputs for the first and last names -->    
+    <div class="row mb-4">
+          <div class="col">
+            <div data-mdb-input-init class="form-outline">
+              <input type="text" id="form3Example1" class="form-control" placeholder="First name" name="first_name"/>
+            </div>
+          </div>
+          <div class="col">
+            <div data-mdb-input-init class="form-outline">
+              <input type="text" id="form3Example2" class="form-control" placeholder="Last name" name="last_name"/>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Email input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="email" id="form3Example3" class="form-control" placeholder="Email address" name="email"/>
+        </div>
+
+        <!-- username -->
+        <div data-mdb-input-init class="form-outline mb-4">
+            <input type="text" id="form3Example3" class="form-control" placeholder="Username" name="username"/>
+          </div>
+        
+        <!-- Password input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="password" id="form3Example4" class="form-control" placeholder="Password" name="password"/>
+        </div>
+
+        <!-- <div data-mdb-input-init class="form-outline mb-4">
+            <input type="password" id="form3Example4" class="form-control" placeholder="Password again" password_agin="password_agin"/>
+        </div> -->
+              
+        <!-- College -->
+        <div class="h-2">
+            <select id="inputState" class="form-select w-100 h-2" name="college">
+              <option selected>College</option>
+              <option>THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY</option>
+              <option>Damodaram Sanjivayya National Law University</option>
+              <option>Acharya N.G. Ranga Agricultural University</option>
+              <option>Abhilashi University</option>
+            </select>
+          </div>
+        
+        <!-- image -->
+        
+        <div class="mb-3">
+          <input class="form-control" type="file" id="formFile" name="image">
+        </div>
+                
+        <!-- Checkbox -->
+        <div class="form-check d-flex mt-4 ml-auto mr-auto">
+            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+            <label class="form-check-label" for="form2Example33">
+            terms and condition
+            </label>
+        </div>
+
+        <!-- Submit button -->
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4 mt-4">Sign up</button>
+      
+</form>
+
+<script>
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+initMDB({ Input, Ripple });
+
+</script>
+
+{% endblock %}

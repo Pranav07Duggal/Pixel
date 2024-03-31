@@ -1,0 +1,389 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<!-- links -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- css -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+.main-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 15px 40px;
+  flex-wrap: wrap;
+}
+
+#nothing-alert{
+	display: none;
+	width: 100%;
+	margin: 50px auto;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80px;
+  height: 80px;
+  margin: 0.5em;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  animation: populate 0.5s ease-out normal backwards;
+}
+
+.cards:hover {
+  transform: scale(1.05);
+  z-index: 1;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes populate {
+  0% {
+    transform: scale(0);
+  }
+}
+
+.icon-name {
+  font-size: 0.7em;
+  text-align: center;
+  margin: 0;
+}
+
+.search-container{
+  position: relative;
+  height: 45px;
+  max-width: 650px;
+  width: 30%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container i {
+  position: absolute;
+  left: 20px;
+  font-size: 16px;
+  color: #707070;
+}
+
+#search-input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-left: 50px;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 786px) {
+  .search-container{
+    width: 50%;
+  }
+}
+
+/* top user*/
+
+.content {
+   min-width: 100vw;
+   width: 100%;
+   height: 100%;
+   padding-top: 40px;
+   margin: 0 auto;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: left;
+}
+
+.card {
+   width: 32.8%;
+   height: 250px;
+   background-color: #292929;
+   margin: 2px;
+   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+   border: 2px solid rgba(7, 7, 7, 0.12);
+   font-size: 16px;   
+   transition: all 0.3s ease;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+   transition: all 0.3s ease;
+}
+
+.icon {
+   margin: 0 auto;
+   width: 100%;
+   height: 80px;
+   max-width:80px;
+   border-radius: 100%;
+   background-position: center;
+   background-size:cover;
+}
+
+
+.card .title {
+   width: 100%;
+   margin: 0;
+   text-align: center;
+   margin-top: 30px;
+   color: white;
+   font-weight: 600;
+   text-transform: lowercase;
+   letter-spacing: 4px;
+}
+
+.card .text {
+   width: 80%;
+   margin: 0 auto;
+   font-size: 13px;
+   text-align: center;
+   margin-top: 20px;
+   color: white;
+   font-weight: 200;
+   letter-spacing: 2px;
+   opacity: 0;
+   max-height:0;
+   transition: all 0.3s ease;
+}
+
+.card:hover {
+   height: 270px;
+}
+
+.card:hover .info {
+   height: 90%;
+}
+
+.card:hover .text {
+   transition: all 0.3s ease;
+   opacity: 1;
+   max-height:40px;
+}
+
+#im{
+  background-color: lightgray;
+  background-image: url("{% static 'images/user.png'%}");
+  height: 70px;
+  width: 70px;
+}
+
+@media screen and (max-width: 786px) {
+  .card{
+    width: 48%;
+	flex-wrap: wrap;
+  }
+}
+
+.drop{
+  display: flex;
+  height: fit-content;
+  flex-wrap: nowrap;
+  z-index: 1;
+  list-style-type: none;
+  background-color: azure;
+  width: 100%;
+  margin-top: 15px;
+}
+#drop_item1 ,#drop_item2, #drop_item3 ,#drop_item4{
+  margin: 12px;
+  color: black;
+  padding: 10px;
+}
+
+#drop_item1:hover ,#drop_item2:hover, #drop_item3:hover ,#drop_item4:hover{
+  background-color: orange;  
+}
+
+#close{
+  background-image: url("{%static 'images/close.png'%}");
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  margin: 10px auto 0 auto;
+  cursor: pointer;
+}
+
+
+</style>
+
+
+<!-- body -->
+<div class="search-container main-container" style="margin: 0 auto 0 auto;">
+<!-- <div id="search-autocomplete" class="form-outline"> -->
+        
+<input class="autocomplete-input form-control rounded"
+  placeholder="Search"
+  aria-label="Search Wikipedia"
+  id="search_input",
+  style="border:1px white ;"
+>
+
+<div class="drop" style="display: block;"> 
+  <div id="drop_item1"></div>
+  <!-- <div id="drop_item2"></div>
+  <div id="drop_item3"></div> -->
+</div>
+
+<!-- </div> -->
+</div>
+
+<!-- top user -->
+   
+   <div class="content">
+	{%for t in top %}
+  <a class="card" href="{%url 'profile' t.id%}">
+      <div class="card">
+          
+            {%if t.prof_image%}        
+            <div class="icon" style="background-image: url('{{t.prof_image.url}}');"></div>
+            {%else%}
+            <div class="icon" id="im"></div>
+            {%endif%}
+            <p class="title">{{t.username}}</p>
+            <p class="text">{{t.bio}}</p>
+        
+      </div>
+    </a> 
+	{%endfor%}
+	</div>
+   
+</div>
+<!-- js -->
+<script>
+
+// levenshteinFullMatrix to decide priority
+
+function levenshteinFullMatrix(str1, str2) {
+    const m = str1.length;
+    const n = str2.length;
+ 
+    const dp = new Array(m + 1).fill(null).map(() => new Array(n + 1).fill(0));
+ 
+    for (let i = 0; i <= m; i++) {
+        dp[i][0] = i;
+    }
+    for (let j = 0; j <= n; j++) {
+        dp[0][j] = j;
+    }
+     
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            if (str1[i - 1] === str2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = 1 + Math.min(
+                    dp[i][j - 1],
+                    Math.min(
+                        dp[i - 1][j],
+                        dp[i - 1][j - 1]
+                    )
+                );
+            }
+        }
+    }
+    return dp[m][n];
+}
+
+
+$(document).ready(function () {
+
+
+// hide on cross click 
+
+$('#close').click(()=>{ 
+    $('.drop').hide();      
+  });
+
+// hide the dropbox on click
+
+  $('.drop').hide();
+
+  $('#drop_item1').click(()=>{ 
+      $('.drop').hide();
+  });
+
+  $('#drop_item2').click(()=>{ 
+    $('.drop').hide();      
+  });
+
+  $('#drop_item3').click(()=>{ 
+    $('.drop').hide();      
+  });
+
+// keyup get
+
+  $('#search_input').keyup(()=>{
+
+      $('.drop').show();
+  
+      input = $('#search_input').val()
+
+      if (input)
+      {   
+        
+          $('#drop_item1').mouseover(()=>{ 
+          $('#search_input').val($('#drop_item1').text());
+          });
+
+          $('#drop_item2').mouseover(()=>{ 
+            $('#search_input').val($('#drop_item2').text());
+          });
+
+          $('#drop_item3').mouseover(()=>{ 
+            $('#search_input').val($('#drop_item3').text());
+          });
+      
+      }
+      else{
+          $('.drop').hide();
+      }
+
+      console.log(input)
+      const settings = {
+      async: true,
+      crossDomain: true,
+      url:`http://127.0.0.1:8000/search/?search=${input}`,
+      method: 'GET',
+      };
+
+      $.ajax(settings).done(function (response) {
+        n=response.payload;
+        console.log(n)
+        if (n){
+          n.forEach(element => {
+            distance = levenshteinFullMatrix(input, element.username)
+            if(0<= distance <10){
+              $('#drop_item1').text(element.username)
+            }
+            else{
+               $('#drop_item1').hide
+            }
+
+          });
+        }
+      });
+   
+  });
+
+});
+
+</script>
+
+{%endblock%}
+

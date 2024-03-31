@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
+    <title>Pixel</title>
+    <link rel="stylesheet" href="{%static 'bootstrap/css/bootstrap.min.css'%}">
+</head>
+<style>
+    .main{
+        min-height: 100vh;
+        height: 100%;
+    }
+</style>
+
+<body>
+    
+<!-- navbar  -->
+{% include 'snippets/header.html' %}
+
+<!-- content -->
+<div class="main">
+<br>
+    {%block content%}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {%endblock%}
+<br>
+</div>
+
+<!-- footer -->
+{%include 'snippets/footer.html' %}
+
+<script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+</body>
+</html>

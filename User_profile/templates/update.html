@@ -1,0 +1,658 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+
+{%if request.user.id == u_data.id %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<!-- css -->
+
+<style>
+
+body{
+    background:#eee;
+}
+
+.card{
+    border:none;
+
+    position:relative;
+    overflow:hidden;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.card:before{
+    
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background-color:#E1BEE7;
+    transform:scaleY(1);
+    transition:all 0.5s;
+    transform-origin: bottom
+}
+
+.card:after{
+    
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background-color:#8E24AA;
+    transform:scaleY(0);
+    transition:all 0.5s;
+    transform-origin: bottom
+}
+
+.card:hover::after{
+    transform:scaleY(1);
+}
+
+
+.fonts{
+    font-size:11px;
+}
+
+.social-list{
+    display:flex;
+    list-style:none;
+    justify-content:center;
+    padding:0;
+}
+
+/* checkbox */
+
+    .checkbox-wrapper-19 {
+      box-sizing: border-box;
+      --background-color: #fff;
+      --checkbox-height: 25px;
+    }
+  
+    @-moz-keyframes dothabottomcheck-19 {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) / 2);
+      }
+    }
+  
+    @-webkit-keyframes dothabottomcheck-19 {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) / 2);
+      }
+    }
+  
+    @keyframes dothabottomcheck-19 {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) / 2);
+      }
+    }
+  
+    @keyframes dothatopcheck-19 {
+      0% {
+        height: 0;
+      }
+      50% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) * 1.2);
+      }
+    }
+  
+    @-webkit-keyframes dothatopcheck-19 {
+      0% {
+        height: 0;
+      }
+      50% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) * 1.2);
+      }
+    }
+  
+    @-moz-keyframes dothatopcheck-19 {
+      0% {
+        height: 0;
+      }
+      50% {
+        height: 0;
+      }
+      100% {
+        height: calc(var(--checkbox-height) * 1.2);
+      }
+    }
+  
+    .checkbox-wrapper-19 input[type=checkbox] {
+      display: none;
+    }
+  
+    .checkbox-wrapper-19 .check-box {
+      height: var(--checkbox-height);
+      width: var(--checkbox-height);
+      background-color: transparent;
+      border: calc(var(--checkbox-height) * .1) solid #000;
+      border-radius: 5px;
+      position: relative;
+      display: inline-block;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -moz-transition: border-color ease 0.2s;
+      -o-transition: border-color ease 0.2s;
+      -webkit-transition: border-color ease 0.2s;
+      transition: border-color ease 0.2s;
+      cursor: pointer;
+    }
+    .checkbox-wrapper-19 .check-box::before,
+    .checkbox-wrapper-19 .check-box::after {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      position: absolute;
+      height: 0;
+      width: calc(var(--checkbox-height) * .2);
+      background-color: #34b93d;
+      display: inline-block;
+      -moz-transform-origin: left top;
+      -ms-transform-origin: left top;
+      -o-transform-origin: left top;
+      -webkit-transform-origin: left top;
+      transform-origin: left top;
+      border-radius: 5px;
+      content: " ";
+      -webkit-transition: opacity ease 0.5;
+      -moz-transition: opacity ease 0.5;
+      transition: opacity ease 0.5;
+    }
+    .checkbox-wrapper-19 .check-box::before {
+      top: calc(var(--checkbox-height) * .72);
+      left: calc(var(--checkbox-height) * .41);
+      box-shadow: 0 0 0 calc(var(--checkbox-height) * .05) var(--background-color);
+      -moz-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+      -o-transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+    .checkbox-wrapper-19 .check-box::after {
+      top: calc(var(--checkbox-height) * .37);
+      left: calc(var(--checkbox-height) * .05);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  
+    .checkbox-wrapper-19 input[type=checkbox]:checked + .check-box,
+    .checkbox-wrapper-19 .check-box.checked {
+      border-color: #34b93d;
+    }
+    .checkbox-wrapper-19 input[type=checkbox]:checked + .check-box::after,
+    .checkbox-wrapper-19 .check-box.checked::after {
+      height: calc(var(--checkbox-height) / 2);
+      -moz-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      -o-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      -webkit-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      animation: dothabottomcheck-19 0.2s ease 0s forwards;
+    }
+    .checkbox-wrapper-19 input[type=checkbox]:checked + .check-box::before,
+    .checkbox-wrapper-19 .check-box.checked::before {
+      height: calc(var(--checkbox-height) * 1.2);
+      -moz-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      -o-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      animation: dothatopcheck-19 0.4s ease 0s forwards;
+    }
+
+
+    /* image input  */
+
+    #imageInputContainer {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    #imageInput {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    #imagePreview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    #inputIcon {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: #fff;
+      background-color: rgb(200, 200, 200 ,0.5);
+      border: none;
+      border-radius: 50%;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+
+    /* button */
+
+    
+  .btn-17,
+.btn-17 *,
+.btn-17 :after,
+.btn-17 :before,
+.btn-17:after,
+.btn-17:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-17 {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.btn-17:disabled {
+  cursor: default;
+}
+
+.btn-17:-moz-focusring {
+  outline: auto;
+}
+
+.btn-17 svg {
+  display: block;
+}
+
+.btn-17 [hidden] {
+  display: none;
+}
+
+.btn-17 {
+  border-radius: 99rem;
+  border-width: 2px;
+  padding: 0.8rem 3rem;
+  z-index: 0;
+}
+
+.btn-17,
+.btn-17 .text-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-17 .text-container {
+  display: block;
+  mix-blend-mode: difference;
+}
+
+.btn-17 .text {
+  display: block;
+  position: relative;
+}
+
+.btn-17:hover .text {
+  -webkit-animation: move-up-alternate 0.3s forwards;
+  animation: move-up-alternate 0.3s forwards;
+}
+
+@-webkit-keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(80%);
+  }
+
+  51% {
+    transform: translateY(-80%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(80%);
+  }
+
+  51% {
+    transform: translateY(-80%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.btn-17:after,
+.btn-17:before {
+  --skew: 0.2;
+  background: #fff;
+  content: "";
+  display: block;
+  height: 102%;
+  left: calc(-50% - 50% * var(--skew));
+  pointer-events: none;
+  position: absolute;
+  top: -104%;
+  transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.btn-17:after {
+  --progress: 0%;
+  left: calc(50% + 50% * var(--skew));
+  top: 102%;
+  z-index: -1;
+}
+
+.btn-17:hover:before {
+  --progress: 100%;
+}
+
+.btn-17:hover:after {
+  --progress: -102%;
+}
+
+
+</style>
+
+<!-- content -->
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card p-3 py-4">
+                
+                <!-- upload --> 
+              <form action="{%url 'update' user.id %}"  method="post" enctype="multipart/form-data">
+                
+                {%csrf_token%}
+                
+                <div id="imageInputContainer" style="margin: 0 auto 0 auto;">
+                  <input type="file" id="imageInput"  name="prof_image">
+                  {%if u_data.prof_image %}
+                  <img id="imagePreview" src="/media/profile_images/{{u_data.id}}/profile_image.png" alt="Image Preview">
+                  {%else%}
+                  <img id="imagePreview" src="{%static '/images/user.png'%}" alt="Image Preview" style="background-color: blue;">
+                  {%endif%}
+                  <div id="inputIcon" onclick="openImageInput()">✏️</div>
+                </div>
+
+                <button id="click">clear</button>
+              
+                <!-- Upload  -->
+
+
+                
+                <div class="text-center mt-3">
+                    <div class="form-outline" data-mdb-input-init style="display: flex; justify-content: space-around; margin: 10px;">
+                        <label class="form-label" for="typeEmail" style="flex-basis: 15%; text-align: center;">First_name</label>
+                        <input type="text" id="typeEmail" class="form-control" value="{{u_data.first_name}}" width="60%"  name="first_name" style="flex-basis: 60%;"/>      
+                    </div>
+
+                    <div class="form-outline" data-mdb-input-init style="display: flex; justify-content: space-around; margin: 10px;">
+                        <label class="form-label" for="typeEmail" style="flex-basis: 15%; text-align: center;">Last_name</label>
+                        <input type="text" id="typeEmail" class="form-control" value="{{u_data.last_name}}" width="60%"  name="last_name" style="flex-basis: 60%;"/>      
+                    </div>
+                                        
+                    <div class="form-outline" data-mdb-input-init style="display: flex; justify-content: space-around; margin: 10px;">
+                        <label class="form-label" for="typeEmail" style="flex-basis: 15%; text-align: center;">Username</label>
+                        <input type="text" id="typeEmail" class="form-control" value="{{u_data.username}}" width="60%"  name="username" style="flex-basis: 60%;"/>      
+                    </div>
+
+                    <div class="form-outline" data-mdb-input-init style="display: flex; justify-content: space-around; margin: 10px;">
+                      <label class="form-label" for="typeEmail" style="flex-basis: 15%; text-align: center;">Bio</label>
+                      <textarea type="text" id="typeEmail" class="form-control" width="60%"  name="bio" style="flex-basis: 60%;">{{u_data.Bio}}</textarea>      
+                  </div>
+
+                    <div class="form-outline" data-mdb-input-init style=" margin: 10px;">
+                        <label class="form-label" for="typeEmail" style="flex-basis: 15%; text-align: center;">College</label>
+                        <select class="form-select" aria-label="Default select example" id="typeEmail" class="form-control" value="{{u_data.college}}" width="60%"  name="college" style="overflow: hidden;" name="college">
+                          <option selected>{{u_data.college}}</option>
+                          <option value="THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY">THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY</option>
+                          <option value="Damodaram Sanjivayya National Law University">Damodaram Sanjivayya National Law University</option>
+                          <option value="Acharya N.G. Ranga Agricultural University">Acharya N.G. Ranga Agricultural University</option>
+                          <option value="Abhilashi University">Abhilashi University</option>
+                        </select>     
+                    </div>
+                    
+                    <div class="form-outline" data-mdb-input-init style="display: flex; margin: 10px;">
+                        <label class="form-label" for="typeEmail" style="flex-basis: 30%; text-align: center;">Hide email</label>
+                        <div class="checkbox-wrapper-19" style="flex-basis: 15%;">
+                            {%if u_data.hide_email%}
+                            <input type="checkbox" id="cbtest-19" checked="True" name="hide_email"/>
+                            {%else%}
+                            <input type="checkbox" id="cbtest-19" name="hide_email"/>
+                            {%endif%}
+                            <label for="cbtest-19" class="check-box">
+                        </div>
+                    </div>
+                    
+                    <button class="btn-17" type="submit">
+                      <span class="text-container">
+                        <span class="text">Edit</span>
+                      </span>
+                    </button>
+                  </form>
+
+                </div>
+                             
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js -->
+<script>
+
+
+// image input 
+
+$(document).ready(function() {
+  
+    var input;
+    $('#click').click(()=>{
+        input = ''
+    });
+    $('#imageInput').on('change', function(e) {
+      input = e.target;
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var imageUrl = e.target.result;
+          $('#imagePreview').attr('src', imageUrl);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    });
+  });
+
+</script>
+{%else%}
+
+
+<style>
+
+.card {
+  max-width: 320px;
+  border-width: 1px;
+  border-color: rgba(219, 234, 254, 1);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgba(96, 165, 250, 1);
+  padding: 0.5rem;
+  color: rgba(255, 255, 255, 1);
+}
+.closeButton {
+  border: none;
+  margin-left: 23%;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  height: 2rem;
+  width: 2rem;
+  display: grid;
+  place-items: center;
+  transition: background-color ease 0.25s;
+}
+.closeButton:hover {
+  background-color: rgba(230, 25, 25, 1);
+  color: white;
+}
+.icon svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.alert {
+  font-weight: 600;
+  color: rgba(107, 114, 128, 1);
+}
+
+.message {
+  margin-top: 1rem;
+  color: rgba(107, 114, 128, 1);
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.actions a {
+  text-decoration: none;
+}
+
+.mark-as-read,
+.read {
+  display: inline-block;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.read {
+  background-color: rgba(59, 130, 246, 1);
+  color: rgba(255, 255, 255, 1);
+}
+.read:hover {
+  background-color: rgba(17, 104, 245, 1);
+}
+
+.mark-as-read {
+  margin-top: 0.5rem;
+  background-color: rgba(249, 250, 251, 1);
+  color: rgba(107, 114, 128, 1);
+  transition: all 0.15s ease;
+}
+
+.mark-as-read:hover {
+  background-color: rgb(230, 231, 233);
+}
+
+
+</style>
+<br><br>
+<div class="card" style="margin: 0 auto 0 auto ;">
+  <div class="header">
+    <span class="icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </span>
+    <p class="alert">Alert!</p>
+  </div>
+
+  <p class="message">
+    Don't try to type in the link to get the update page of other user . Your actions are being recorded . Next time you will be <span style="color: red;"> blocked </span>.
+  </p>
+
+  <div class="actions">
+    <a href="/" class="read">Go Home</a>
+  </div>
+</div>
+
+
+<script>
+
+</script>
+
+
+{%endif%}
+{%endblock%}  
